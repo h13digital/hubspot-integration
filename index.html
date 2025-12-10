@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing & Sales Strategy Dashboard - HubSpot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff7a59;
+            --secondary-color: #33475b;
+            --accent-color: #00a4bd;
+            --success-color: #00bda5;
+            --warning-color: #ffb300;
+            --info-color: #2d87d8;
+            --danger-color: #ff5a5f;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --crypto-purple: #805ad5;
+            --crypto-accent: #9f7aea;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f8fa;
+            color: #33475b;
+            line-height: 1.6;
+        }
+        
+        /* ====== NEW HEADER DESIGN ====== */
+        .dashboard-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 25px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .header-left {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo-section i {
+            font-size: 32px;
+            color: #ff7a59;
+        }
+        
+        .header-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        /* IMPORTANT HIGHLIGHT FOR NON-EXPERIENCE CRYPTO TRADERS - COMBINED */
+        .target-audience-box {
+            background: linear-gradient(135deg, #ff7a59, #ff5a5f);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 122, 89, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            max-width: 600px;
+        }
+        
+        .target-audience-box i {
+            margin-right: 10px;
+        }
+        
+        .target-audience-box strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: lowercase;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            background: var(--crypto-accent);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+            color: inherit;
+            border: none;
+            background: transparent;
+        }
+        
+        .user-profile:hover {
+            background-color: rgba(138, 43, 226, 0.1);
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8a2be2, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            overflow: hidden;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .user-role {
+            font-size: 12px;
+            color: #cbd5e0;
+        }
+        
+        .hubspot-badge {
+            background-color: #ff7a59;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 1100px) {
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .header-left, .header-right {
+                width: 100%;
+            }
+            
+            .header-right {
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            
+            .target-audience-box {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 20px 15px;
+            }
+            
+            .header-title h1 {
+                font-size: 22px;
+            }
+            
+            .header-nav {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .target-audience-box {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+            
+            .target-audience-box strong {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-right {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-nav {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .hubspot-badge {
+                align-self: center;
+            }
+            
+            .header-title h1 {
+                font-size: 20px;
+            }
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1600px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Strategy Visual Section */
+        .strategy-visual {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            height: fit-content;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary-color);
+        }
+        
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .sessions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .session-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .session-card.first-reach { border-top-color: #3f51b5; }
+        .session-card.retargeting { border-top-color: #2196f3; }
+        .session-card.cs-1 { border-top-color: #00bcd4; }
+        .session-card.cs-2 { border-top-color: #009688; }
+        .session-card.cs-3 { border-top-color: #4caf50; }
+        .session-card.sales { border-top-color: #ff9800; }
+        .session-card.email { border-top-color: #9c27b0; }
+        
+        .session-header {
+            padding: 18px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .session-header.first-reach { background-color: #3f51b5; }
+        .session-header.retargeting { background-color: #2196f3; }
+        .session-header.cs-1 { background-color: #00bcd4; }
+        .session-header.cs-2 { background-color: #009688; }
+        .session-header.cs-3 { background-color: #4caf50; }
+        .session-header.sales { background-color: #ff9800; }
+        .session-header.email { background-color: #9c27b0; }
+        
+        .session-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .session-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .session-status {
+            font-size: 12px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        
+        .session-content {
+            padding: 20px;
+        }
+        
+        .session-desc {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .session-timeline {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .session-timeline li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .session-timeline li:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-icon {
+            color: var(--accent-color);
+            font-size: 14px;
+            width: 20px;
+        }
+        
+        .hubspot-integration {
+            background-color: #f0f7ff;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2d87d8;
+        }
+        
+        .hubspot-integration i {
+            color: #ff7a59;
+        }
+        
+        /* Optimization Table */
+        .optimization-table {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            overflow-x: auto;
+        }
+        
+        .strategy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .strategy-table th {
+            background-color: #33475b;
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .strategy-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .strategy-table tr:nth-child(even) {
+            background-color: #f9fafc;
+        }
+        
+        .strategy-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .phase-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .phase-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .hubspot-feature {
+            background-color: #e6f7ff;
+            border-left: 3px solid var(--accent-color);
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        
+        .hubspot-feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+        
+        .update-badge {
+            background-color: #ff9800;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        /* Tabs */
+        .tabs-container {
+            margin-top: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #7c98b6;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* ====== IMPORTED ABOUT & CONTACT SECTIONS FROM INDEX.HTML ====== */
+        .about-section {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        @media (max-width: 900px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .about-profile {
+            text-align: center;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a365d, var(--crypto-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 60px;
+            color: white;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.3);
+            overflow: hidden;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1a365d;
+        }
+        
+        .profile-title {
+            font-size: 16px;
+            color: var(--crypto-purple);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .profile-desc {
+            color: #2d3748;
+            line-height: 1.7;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .skill-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: #1a365d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-analytics .skill-icon {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: #1a365d;
+        }
+        
+        .skill-growth .skill-icon {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--crypto-purple);
+        }
+        
+        .skill-web3 .skill-icon {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #ff9800;
+        }
+        
+        .skill-esports .skill-icon {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .skill-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+        
+        .skill-desc {
+            color: #718096;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-label {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+        
+        .contact-value {
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #1a365d, #2d3748);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+        }
+        
+        /* ====== IMPORTED FOOTER FROM INDEX.HTML ====== */
+        .footer-secondary {
+            padding: 60px 0 30px;
+            background-color: #1a365d;
+            border-top: 1px solid #2d2d4a;
+            margin-top: 60px;
+        }
+        
+        .footer-secondary-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+            padding: 0 2rem;
+        }
+        
+        @media (max-width: 900px) {
+            .footer-secondary-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        .footer-secondary-brand {
+            margin-bottom: 20px;
+        }
+        
+        .footer-secondary-desc {
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            max-width: 300px;
+        }
+        
+        .footer-secondary-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-secondary-links {
+            list-style: none;
+        }
+        
+        .footer-secondary-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-bottom: 12px;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .footer-secondary-link:hover {
+            color: var(--crypto-accent);
+            transform: translateX(5px);
+        }
+        
+        .footer-secondary-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #6a6a8a;
+            font-size: 14px;
+        }
+        
+        /* Metrics and Charts */
+        .metrics-section {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .metric-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .metric-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .metric-1 .metric-icon { background-color: #e3f2fd; color: #2196f3; }
+        .metric-2 .metric-icon { background-color: #f3e5f5; color: #9c27b0; }
+        .metric-3 .metric-icon { background-color: #e8f5e9; color: #4caf50; }
+        .metric-4 .metric-icon { background-color: #fff3e0; color: #ff9800; }
+        
+        .metric-info h4 {
+            font-size: 14px;
+            color: #7c98b6;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        /* Interactive Elements */
+        .expand-btn {
+            background-color: #f0f7ff;
+            border: none;
+            color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+        
+        .expand-btn:hover {
+            background-color: #e1f0ff;
+        }
+        
+        .flowchart-container {
+            position: relative;
+            margin: 20px 0 30px;
+            min-height: 300px;
+            background-color: #f9fafc;
+            border-radius: 10px;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .flowchart-placeholder {
+            text-align: center;
+            color: #7c98b6;
+            max-width: 400px;
+        }
+        
+        .flowchart-placeholder i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #c3cfdd;
+        }
+        
+        .flowchart-placeholder h3 {
+            margin-bottom: 10px;
+            color: #33475b;
+        }
+        
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #33475b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .print-btn:hover {
+            background-color: #ff7a59;
+            transform: scale(1.1);
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--crypto-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+            transition: var(--transition);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: var(--crypto-purple);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== UPDATED HEADER ====== -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="logo-section">
+                    <i class="fas fa-chart-network"></i>
+                    <div class="header-title">
+                        <h1>Digital Marketing, Customer Service and Sales Strategy</h1>
+                    </div>
+                </div>
+                <!-- COMBINED BOX FOR TARGET AUDIENCE -->
+                <div class="target-audience-box">
+                    <i class="fas fa-bullseye"></i>
+                    <strong>For Non-Experience Crypto Traders</strong>
+                    SPECIALLY DESIGNED FOR BEGINNER CRYPTO TRADERS
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="header-nav">
+                    <a href="#about" class="nav-link">about</a>
+                    <a href="#contact" class="nav-link">contact</a>
+                    <a href="https://h13digital.github.io/#portfolio" class="user-profile">
+                        <div class="user-avatar">
+                            <img src="https://avatars.githubusercontent.com/u/247514700" alt="HIEP NGUYEN" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">HIEP NGUYEN</span>
+                            <span class="user-role">Marketing Architect</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hubspot-badge">
+                    <i class="fas fa-cube"></i>
+                    Designed & Integrated via HubSpot
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- SCROLL TO TOP BUTTON -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Left Column: Strategy Sessions -->
+        <div class="strategy-visual">
+            <h2 class="section-title">
+                <i class="fas fa-sitemap"></i>
+                Marketing Funnel Sessions
+            </h2>
+            
+            <div class="sessions-grid">
+                <!-- First Reach Session -->
+                <div class="session-card first-reach">
+                    <div class="session-header first-reach">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <span>First Reach - Ads Session</span>
+                        </div>
+                        <div class="session-status">Awareness Stage</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Initial contact with potential customers through multiple ad platforms.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fab fa-facebook-f"></i></span>Meta Ads</li>
+                            <li><span class="timeline-icon"><i class="fab fa-google"></i></span>Google Ads</li>
+                            <li><span class="timeline-icon"><i class="fab fa-tiktok"></i></span>TikTok Ads</li>
+                            <li><span class="timeline-icon"><i class="fab fa-linkedin-in"></i></span>LinkedIn Ads</li>
+                            <li><span class="timeline-icon"><i class="fab fa-twitter"></i></span>X (Twitter) Ads</li>
+                            <li><span class="timeline-icon"><i class="fab fa-telegram-plane"></i></span>Telegram Ads</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Marketing Hub: Ads Integration & Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Retargeting Session -->
+                <div class="session-card retargeting">
+                    <div class="session-header retargeting">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-redo"></i>
+                            </div>
+                            <span>Retargeting Strategy</span>
+                        </div>
+                        <div class="session-status">Re-engagement</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Re-engaging users who showed interest but didn't complete actions.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-clipboard-list"></i></span>Submit Form (Incomplete)</li>
+                            <li><span class="timeline-icon"><i class="fas fa-envelope"></i></span>Email Collected</li>
+                            <li><span class="timeline-icon"><i class="fas fa-phone"></i></span>Phone Number</li>
+                            <li><span class="timeline-icon"><i class="fas fa-eye"></i></span>75% View Content</li>
+                            <li><span class="timeline-icon"><i class="fas fa-sign-out-alt"></i></span>User Leave (Exit Intent)</li>
+                            <li><span class="timeline-icon"><i class="fas fa-bullseye"></i></span>Retargeting Meta Ads</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Marketing Hub: Retargeting Audiences</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CS (I) Session -->
+                <div class="session-card cs-1">
+                    <div class="session-header cs-1">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <span>CS (I) Session</span>
+                        </div>
+                        <div class="session-status">Initial Contact</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Initial customer service interaction after confirmation.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-clock"></i></span>1-2 hours after confirmation email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-clipboard-check"></i></span>Submit Form Data Verification</li>
+                            <li><span class="timeline-icon"><i class="fas fa-user-check"></i></span>Lead Qualification</li>
+                            <li><span class="timeline-icon"><i class="fas fa-phone"></i></span>CS Call (By Human)</li>
+                            <li><span class="timeline-icon"><i class="fas fa-envelope-open-text"></i></span>Follow-up Email</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Service Hub: Call Scheduling & Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CS (II) Automation Session -->
+                <div class="session-card cs-2">
+                    <div class="session-header cs-2">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <span>CS (II) Automation Session</span>
+                        </div>
+                        <div class="session-status">Automated Nurturing</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Automated sequence to ensure maximum seminar attendance.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-envelope-open-text"></i></span>Seminar Intro Email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-calendar-day"></i></span>1 day before Seminar - Reminder Email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-clock"></i></span>5 hours before Seminar - Reminder Email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-robot"></i></span>Reminder Call (by AI)</li>
+                            <li><span class="timeline-icon"><i class="fab fa-whatsapp"></i></span>45 mins before Seminar - WhatsApp Message</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Workflows: Automated Sequences</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Join Event Session -->
+                <div class="session-card cs-3">
+                    <div class="session-header cs-3">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span>Join Event (On/Offline)</span>
+                        </div>
+                        <div class="session-status">Event Stage</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Seminar participation and immediate follow-up actions.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-chalkboard-teacher"></i></span>Live/Recorded Seminar Participation</li>
+                            <li><span class="timeline-icon"><i class="fas fa-calendar-check"></i></span>1 day after Seminar - Survey Rating Email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-user-plus"></i></span>2 days after Seminar - Demo Account Email</li>
+                            <li><span class="timeline-icon"><i class="fas fa-comments"></i></span>Community Group Invitation (Telegram/WhatsApp)</li>
+                            <li><span class="timeline-icon"><i class="fas fa-file-download"></i></span>Educational Materials Access</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot CRM: Event Tracking & Segmentation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Email Nurturing Session -->
+                <div class="session-card email">
+                    <div class="session-header email">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-mail-bulk"></i>
+                            </div>
+                            <span>Email Nurturing Session</span>
+                        </div>
+                        <div class="session-status">Educational Content</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Continuous education and relationship building through email.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-graduation-cap"></i></span>Weekly Educational Emails</li>
+                            <li><span class="timeline-icon"><i class="fas fa-newspaper"></i></span>Market Updates & Analysis</li>
+                            <li><span class="timeline-icon"><i class="fas fa-book"></i></span>Trading Guides & Tutorials</li>
+                            <li><span class="timeline-icon"><i class="fas fa-chart-line"></i></span>Performance Reports</li>
+                            <li><span class="timeline-icon"><i class="fas fa-question-circle"></i></span>Q&A Sessions Invitations</li>
+                            <li><span class="timeline-icon"><i class="fas fa-award"></i></span>Success Stories & Testimonials</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Marketing Hub: Email Sequences</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sales Session -->
+                <div class="session-card sales">
+                    <div class="session-header sales">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <span>Sales Session</span>
+                        </div>
+                        <div class="session-status">Conversion Stage</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Direct sales engagement for qualified leads.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-bullseye"></i></span>Lead Scoring & Qualification</li>
+                            <li><span class="timeline-icon"><i class="fas fa-phone-volume"></i></span>Sales Call (Conditional Offer)</li>
+                            <li><span class="timeline-icon"><i class="fas fa-file-contract"></i></span>Proposal & Contract Presentation</li>
+                            <li><span class="timeline-icon"><i class="fas fa-credit-card"></i></span>Deposit Process Guidance</li>
+                            <li><span class="timeline-icon"><i class="fas fa-user-plus"></i></span>Account Setup & Onboarding</li>
+                            <li><span class="timeline-icon"><i class="fas fa-trophy"></i></span>Welcome Package & Bonuses</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Sales Hub: Deal Pipeline Management</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CS (III) Session -->
+                <div class="session-card cs-3">
+                    <div class="session-header cs-3">
+                        <div class="session-title">
+                            <div class="session-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>CS (III) Session</span>
+                        </div>
+                        <div class="session-status">Success Review</div>
+                    </div>
+                    <div class="session-content">
+                        <div class="session-desc">
+                            Post-sale support and strategy optimization.
+                        </div>
+                        <ul class="session-timeline">
+                            <li><span class="timeline-icon"><i class="fas fa-calendar-alt"></i></span>2 weeks after Seminar - Strategy Review Call</li>
+                            <li><span class="timeline-icon"><i class="fas fa-chart-bar"></i></span>Performance Analysis</li>
+                            <li><span class="timeline-icon"><i class="fas fa-tools"></i></span>Troubleshooting & Support</li>
+                            <li><span class="timeline-icon"><i class="fas fa-lightbulb"></i></span>Advanced Strategy Recommendations</li>
+                            <li><span class="timeline-icon"><i class="fas fa-sync-alt"></i></span>Upsell/Cross-sell Opportunities</li>
+                            <li><span class="timeline-icon"><i class="fas fa-star"></i></span>Customer Satisfaction Survey</li>
+                        </ul>
+                        <div class="hubspot-integration">
+                            <i class="fas fa-cube"></i>
+                            <span>HubSpot Service Hub: Customer Success Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flowchart Placeholder -->
+            <div style="margin-top: 30px;">
+                <h3 class="section-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Complete Strategy Flowchart
+                </h3>
+                <div class="flowchart-container">
+                    <div class="flowchart-placeholder">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Complete Marketing Funnel Flow</h3>
+                        <p>Visual representation of the complete customer journey</p>
+                        <button class="expand-btn" style="background-color: #ff7a59; color: white; margin: 20px auto;" id="uploadFlowchart">
+                            <i class="fas fa-upload"></i> Upload Custom Flowchart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column: Optimization Table -->
+        <div class="optimization-table">
+            <h2 class="section-title">
+                <i class="fas fa-rocket"></i>
+                UPDATED Optimization Strategy
+            </h2>
+            
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="table">Strategy Table</button>
+                    <button class="tab" data-tab="metrics">KPIs & Metrics</button>
+                    <button class="tab" data-tab="hubspot">HubSpot Features</button>
+                    <button class="tab" data-tab="sessions">Session Details</button>
+                </div>
+                
+                <!-- Table Tab -->
+                <div class="tab-content active" id="table">
+                    <table class="strategy-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="25%">Phase/Action</th>
+                                <th width="20%">Purpose (What to do?)</th>
+                                <th width="25%">Why (Strategic Benefit)</th>
+                                <th width="25%">HubSpot Feature/Function</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="phase-number">1</span></td>
+                                <td>
+                                    <div class="phase-title">First Reach - Ads Session</div>
+                                </td>
+                                <td>Attract high-quality traffic from multiple ad channels to Landing Page</td>
+                                <td>Ensure diverse traffic, control costs (CAC), and optimize the most effective lead source</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-ad"></i> Marketing Hub (Ads Tool)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">2</span></td>
+                                <td>
+                                    <div class="phase-title">Retargeting Strategy</div>
+                                </td>
+                                <td>Convert Visitors into Leads through the Seminar registration form</td>
+                                <td>Maximize lead conversion rate; Nurture back those with intent but not yet registered</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-window-restore"></i> Marketing Hub (Landing Pages & Forms)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">3</span></td>
+                                <td>
+                                    <div class="phase-title">CS (I) Session</div>
+                                </td>
+                                <td>Send confirmation email and CS call to confirm and welcome</td>
+                                <td>Confirm registration, build initial trust, and ensure contact information is valid</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-bolt"></i> Marketing Hub (Workflows)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">4</span></td>
+                                <td>
+                                    <div class="phase-title">CS (II) Automation Session <span class="update-badge">UPDATED</span></div>
+                                </td>
+                                <td>Send 3 automated reminder touchpoints before the Seminar</td>
+                                <td>Maximize event Attendance Rate, reduce no-show rate</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-clock"></i> Marketing Hub (Workflows) with Time Delay
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">5</span></td>
+                                <td>
+                                    <div class="phase-title">Join Event (On/Offline)</div>
+                                </td>
+                                <td>Invite guests to join Telegram/WhatsApp Group to share materials</td>
+                                <td>Move Lead from ad/email environment to community environment for easier nurturing</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-tags"></i> HubSpot CRM (Tagging)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">6</span></td>
+                                <td>
+                                    <div class="phase-title">Email Nurturing Session</div>
+                                </td>
+                                <td>Send educational email series for the Non-SQL group (not ready to buy)</td>
+                                <td>Build trust, provide value, address barriers, and retain Lead in the system</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-mail-bulk"></i> Marketing Hub (Workflows with Branching)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">7</span></td>
+                                <td>
+                                    <div class="phase-title">Lead Scoring & Segmentation <span class="update-badge">UPDATED</span></div>
+                                </td>
+                                <td>Automatically score and classify Leads into SQL and Non-SQL</td>
+                                <td>Ensure the Sales team only works with high-quality Leads, optimize time and increase Win Rate</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-chart-line"></i> HubSpot CRM (Lead Scoring)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">8</span></td>
+                                <td>
+                                    <div class="phase-title">Sales Session</div>
+                                </td>
+                                <td>Sales team calls only when Lead reaches SQL Threshold</td>
+                                <td>CONDITIONAL SELLING: Increase Sales efficiency and avoid damaging relationships with Leads not ready</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-handshake"></i> Sales Hub (Deals Pipeline)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-number">9</span></td>
+                                <td>
+                                    <div class="phase-title">CS (III) Session <span class="update-badge">UPDATED</span></div>
+                                </td>
+                                <td>CS calls 2 weeks after Seminar for the Non-SQL group to support virtual trading strategy</td>
+                                <td>Turn survey call into Support Value, find the final barrier to prepare for Sales</td>
+                                <td>
+                                    <div class="hubspot-feature">
+                                        <i class="fas fa-headset"></i> Service Hub (Calling & Health Score)
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Metrics Tab -->
+                <div class="tab-content" id="metrics">
+                    <div class="metrics-section">
+                        <div class="metric-card metric-1">
+                            <div class="metric-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>Lead Conversion Rate</h4>
+                                <div class="metric-value">4.2%</div>
+                                <small>Visitor to Lead</small>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card metric-2">
+                            <div class="metric-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>Seminar Attendance</h4>
+                                <div class="metric-value">82%</div>
+                                <small>Of registered leads</small>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card metric-3">
+                            <div class="metric-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>SQL Conversion</h4>
+                                <div class="metric-value">45%</div>
+                                <small>Leads to Sales Qualified</small>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card metric-4">
+                            <div class="metric-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>ROI (30-day)</h4>
+                                <div class="metric-value">5.2x</div>
+                                <small>Return on ad spend</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background-color: #f0f7ff; border-radius: 10px;">
+                        <h4><i class="fas fa-chart-bar"></i> Key Performance Indicators by Session</h4>
+                        <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                            <div>
+                                <h5>First Reach Session</h5>
+                                <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px;">
+                                    <li>CTR: 2.3% (Target: 2.0%)</li>
+                                    <li>CPC: $1.45 (Target: $1.50)</li>
+                                    <li>Landing Page Views: 12,450</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5>CS Sessions</h5>
+                                <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px;">
+                                    <li>CS (I) Call Connect Rate: 68%</li>
+                                    <li>CS (II) Attendance Boost: +24%</li>
+                                    <li>CS (III) Satisfaction: 92%</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5>Email Nurturing</h5>
+                                <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px;">
+                                    <li>Open Rate: 42% (Industry: 35%)</li>
+                                    <li>Click-through Rate: 8.5%</li>
+                                    <li>Unsubscribe Rate: 0.8%</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5>Sales Session</h5>
+                                <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px;">
+                                    <li>Win Rate: 28% (Target: 25%)</li>
+                                    <li>Average Deal Size: $850</li>
+                                    <li>Sales Cycle: 14 days</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HubSpot Tab -->
+                <div class="tab-content" id="hubspot">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+                        <div class="session-card" style="border-top-color: #ff7a59;">
+                            <div class="session-header" style="background-color: #ff7a59;">
+                                <div class="session-title">
+                                    <div class="session-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                    <span>Marketing Hub</span>
+                                </div>
+                            </div>
+                            <div class="session-content">
+                                <ul class="session-timeline">
+                                    <li><span class="timeline-icon"><i class="fas fa-ad"></i></span>Ads Integration & Tracking</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-window-restore"></i></span>Landing Pages & Forms</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-bolt"></i></span>Automated Workflows</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-mail-bulk"></i></span>Email Marketing</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-chart-line"></i></span>Analytics & Reporting</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-sitemap"></i></span>Lead Scoring & Segmentation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="session-card" style="border-top-color: #00a4bd;">
+                            <div class="session-header" style="background-color: #00a4bd;">
+                                <div class="session-title">
+                                    <div class="session-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                    <span>Sales Hub</span>
+                                </div>
+                            </div>
+                            <div class="session-content">
+                                <ul class="session-timeline">
+                                    <li><span class="timeline-icon"><i class="fas fa-tasks"></i></span>Deal Pipeline Management</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-phone"></i></span>Calling Integration</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-file-contract"></i></span>Quotes & Proposals</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-chart-pie"></i></span>Sales Analytics</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-handshake"></i></span>Meeting Scheduling</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-money-check-alt"></i></span>Payment Tracking</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="session-card" style="border-top-color: #00bda5;">
+                            <div class="session-header" style="background-color: #00bda5;">
+                                <div class="session-title">
+                                    <div class="session-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                    <span>Service Hub</span>
+                                </div>
+                            </div>
+                            <div class="session-content">
+                                <ul class="session-timeline">
+                                    <li><span class="timeline-icon"><i class="fas fa-headset"></i></span>Customer Support Tickets</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-poll"></i></span>Surveys & Feedback</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-comments"></i></span>Live Chat & Conversations</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-clipboard-check"></i></span>Knowledge Base</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-heartbeat"></i></span>Customer Health Scoring</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-video"></i></span>Video Hosting & Meetings</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="session-card" style="border-top-color: #9c27b0;">
+                            <div class="session-header" style="background-color: #9c27b0;">
+                                <div class="session-title">
+                                    <div class="session-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                    <span>CRM & Operations</span>
+                                </div>
+                            </div>
+                            <div class="session-content">
+                                <ul class="session-timeline">
+                                    <li><span class="timeline-icon"><i class="fas fa-database"></i></span>Centralized Contact Database</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-sitemap"></i></span>Lead Scoring & Segmentation</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-sync"></i></span>Data Synchronization</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-filter"></i></span>Advanced Filtering</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-cogs"></i></span>Custom Properties & Automations</li>
+                                    <li><span class="timeline-icon"><i class="fas fa-shield-alt"></i></span>Data Quality & Governance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Session Details Tab -->
+                <div class="tab-content" id="sessions">
+                    <div style="margin-top: 20px;">
+                        <h4><i class="fas fa-calendar-alt"></i> Session Timeline & Dependencies</h4>
+                        
+                        <div style="margin-top: 20px; padding: 20px; background-color: #f8f9fa; border-radius: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                                <h5>Session Execution Timeline</h5>
+                                <span style="font-size: 14px; color: #666;">Total Duration: 30-45 days</span>
+                            </div>
+                            
+                            <div style="position: relative; padding-left: 30px; border-left: 3px solid #3f51b5; margin-top: 20px;">
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #3f51b5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #3f51b5; margin-bottom: 5px;">Day 0-2: First Reach & Retargeting</h6>
+                                        <p style="font-size: 14px; color: #666;">Initial ads launch and immediate retargeting setup</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #2196f3; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #2196f3; margin-bottom: 5px;">Day 1-3: CS (I) Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Confirmation calls and initial qualification</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #00bcd4; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #00bcd4; margin-bottom: 5px;">Day 3-7: CS (II) Automation Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Automated reminders leading to seminar</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #4caf50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">4</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #4caf50; margin-bottom: 5px;">Day 7: Join Event Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Seminar execution and immediate follow-up</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #9c27b0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">5</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #9c27b0; margin-bottom: 5px;">Day 8-30: Email Nurturing Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Continuous education and relationship building</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #ff9800; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">6</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #ff9800; margin-bottom: 5px;">Day 10-21: Sales Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Conditional sales calls for qualified leads</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 30px; height: 30px; background-color: #00bda5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">7</div>
+                                    <div style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                        <h6 style="color: #00bda5; margin-bottom: 5px;">Day 21-45: CS (III) Session</h6>
+                                        <p style="font-size: 14px; color: #666;">Success review and ongoing support</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- ====== ABOUT SECTION (from index.html) ====== -->
+    <section id="about" class="about-section">
+        <h2 style="font-size: 28px; color: #33475b; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #eee; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-user"></i> About the Dashboard Architect
+        </h2>
+        <p style="color: #666; margin-bottom: 30px; font-size: 16px;">Combining data science, marketing strategy, and Web3 expertise</p>
+        
+        <div class="about-content">
+            <div class="about-profile">
+                <div class="profile-image">
+                    <img src="https://avatars.githubusercontent.com/u/247514700" alt="HIEP NGUYEN" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="profile-name">HIEP NGUYEN</div>
+                <div class="profile-title">Senior Performance Marketing Architect</div>
+                <p class="profile-desc">
+                    With expertise in Esport × Web3 ecosystems, I architect data-driven marketing systems that deliver measurable business impact. My approach combines growth hacking, data analytics, and marketing automation to build scalable acquisition engines with positive unit economics.
+                </p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-card skill-analytics">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="skill-title">Data Analytics</h4>
+                    <p class="skill-desc">Advanced analytics & dashboard architecture, SQL/Python, predictive modeling, and data visualization for actionable insights.</p>
+                </div>
+                
+                <div class="skill-card skill-growth">
+                    <div class="skill-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4 class="skill-title">Growth Marketing</h4>
+                    <p class="skill-desc">Scalable acquisition & retention strategies, funnel optimization, A/B testing, and marketing automation for sustainable growth.</p>
+                </div>
+                
+                <div class="skill-card skill-web3">
+                    <div class="skill-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h4 class="skill-title">Web3 Marketing</h4>
+                    <p class="skill-desc">Tokenomics design, NFT marketing strategies, community growth, and blockchain-based user acquisition for Web3 projects.</p>
+                </div>
+                
+                <div class="skill-card skill-esports">
+                    <div class="skill-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h4 class="skill-title">Esports Ecosystems</h4>
+                    <p class="skill-desc">Tournament marketing, player engagement strategies, esports team partnerships, and gaming community development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== CONTACT SECTION (from index.html) ====== -->
+    <section id="contact" class="about-section" style="margin-top: 30px;">
+        <h2 style="font-size: 28px; color: #33475b; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #eee; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-envelope"></i> Contact Information
+        </h2>
+        <p style="color: #666; margin-bottom: 30px; font-size: 16px;">Get in touch for collaborations, consulting, or project inquiries</p>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-label">Email</div>
+                <div class="contact-value">hiep@example.com</div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">LinkedIn</div>
+                <div class="contact-value">linkedin.com/in/hiepnguyen</div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">Portfolio</div>
+                <div class="contact-value">h13digital.github.io</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: #2d3748; max-width: 600px; margin: 0 auto 30px;">
+            Interested in building data-driven marketing systems for your Web3 or gaming project? Let's discuss how we can create measurable impact together.
+        </p>
+        
+        <div style="text-align: center;">
+            <a href="mailto:hiep@example.com" class="cta-button">
+                <i class="fas fa-envelope"></i> Contact Me
+            </a>
+        </div>
+    </section>
+    
+    <!-- ====== IMPORTED FOOTER FROM INDEX.HTML ====== -->
+    <div class="footer-secondary">
+        <div class="footer-secondary-content">
+            <div>
+                <div class="footer-secondary-brand">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #1a365d, var(--crypto-purple)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: white;">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="logo-text" style="font-size: 18px; color: white;">HIEP NGUYEN</div>
+                    </div>
+                </div>
+                <p class="footer-secondary-desc">Data-driven marketing architect specializing in Web3 × Esports ecosystems. Building scalable acquisition engines with positive unit economics.</p>
+            </div>
+            
+            <div>
+                <h4 class="footer-secondary-title">Quick Links</h4>
+                <ul class="footer-secondary-links">
+                    <li><a href="#about" class="footer-secondary-link">About</a></li>
+                    <li><a href="#contact" class="footer-secondary-link">Contact</a></li>
+                    <li><a href="crypto-gotomarketplan.html" class="footer-secondary-link">GTM Plan</a></li>
+                    <li><a href="hubspot.html" class="footer-secondary-link">HubSpot Strategy</a></li>
+                    <li><a href="https://h13digital.github.io/#portfolio" class="footer-secondary-link">Portfolio</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="footer-secondary-title">Resources</h4>
+                <ul class="footer-secondary-links">
+                    <li><a href="#" class="footer-secondary-link">Documentation</a></li>
+                    <li><a href="#" class="footer-secondary-link">Case Studies</a></li>
+                    <li><a href="#" class="footer-secondary-link">Blog</a></li>
+                    <li><a href="#" class="footer-secondary-link">GitHub Repository</a></li>
+                    <li><a href="#" class="footer-secondary-link">API Documentation</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-secondary-bottom">
+            <p>© 2025 HIEP NGUYEN | Marketing Dashboard Suite v2.0</p>
+            <p style="margin-top: 10px; font-size: 12px;">Built with ❤️ for Web3 gaming ecosystems</p>
+        </div>
+    </div>
+    
+    <!-- Print Button -->
+    <button class="print-btn" title="Print Strategy">
+        <i class="fas fa-print"></i>
+    </button>
+    
+    <script>
+        // Tab Switching Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Print functionality
+            const printBtn = document.querySelector('.print-btn');
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Upload flowchart button
+            const uploadBtn = document.getElementById('uploadFlowchart');
+            if (uploadBtn) {
+                uploadBtn.addEventListener('click', function() {
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*';
+                    fileInput.style.display = 'none';
+                    
+                    fileInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const flowchartContainer = document.querySelector('.flowchart-container');
+                                flowchartContainer.innerHTML = `
+                                    <div style="text-align: center; width: 100%;">
+                                        <img src="${e.target.result}" alt="Uploaded Flowchart" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                        <div style="margin-top: 15px;">
+                                            <button class="expand-btn" onclick="resetFlowchart()" style="margin-right: 10px;">
+                                                <i class="fas fa-redo"></i> Reset
+                                            </button>
+                                            <button class="expand-btn" style="background-color: #ff7a59; color: white;" onclick="downloadFlowchart()">
+                                                <i class="fas fa-download"></i> Download
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    
+                    document.body.appendChild(fileInput);
+                    fileInput.click();
+                });
+            }
+            
+            // Session card interactions
+            const sessionCards = document.querySelectorAll('.session-card');
+            sessionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove highlight from all cards
+                    sessionCards.forEach(c => c.style.boxShadow = 'var(--card-shadow)');
+                    
+                    // Highlight clicked card
+                    this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                    
+                    // Scroll to table and highlight corresponding row
+                    const sessionType = this.querySelector('.session-title span').textContent;
+                    highlightTableRow(sessionType);
+                    
+                    // Switch to table tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    document.querySelector('.tab[data-tab="table"]').classList.add('active');
+                    document.getElementById('table').classList.add('active');
+                });
+            });
+            
+            // Highlight table row based on session type
+            function highlightTableRow(sessionType) {
+                const tableRows = document.querySelectorAll('.strategy-table tbody tr');
+                
+                // Remove highlight from all rows
+                tableRows.forEach(row => {
+                    row.style.backgroundColor = '';
+                });
+                
+                // Find and highlight matching row
+                tableRows.forEach(row => {
+                    const rowTitle = row.querySelector('.phase-title').textContent;
+                    if (rowTitle.includes(sessionType) || sessionType.includes(rowTitle)) {
+                        row.style.backgroundColor = '#e8f5e9';
+                        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
+            
+            // Add animation to session cards on load
+            setTimeout(() => {
+                sessionCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.opacity = '1';
+                    }, index * 100);
+                });
+            }, 300);
+            
+            // Initialize session cards with animation
+            sessionCards.forEach(card => {
+                card.style.transform = 'translateY(20px)';
+                card.style.opacity = '0';
+                card.style.transition = 'transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease';
+            });
+            
+            // Global functions for flowchart
+            window.resetFlowchart = function() {
+                const flowchartContainer = document.querySelector('.flowchart-container');
+                flowchartContainer.innerHTML = `
+                    <div class="flowchart-placeholder">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Complete Marketing Funnel Flow</h3>
+                        <p>Visual representation of the complete customer journey</p>
+                        <button class="expand-btn" style="background-color: #ff7a59; color: white; margin: 20px auto;" id="uploadFlowchart">
+                            <i class="fas fa-upload"></i> Upload Custom Flowchart
+                        </button>
+                    </div>
+                `;
+                
+                // Reattach event listener
+                document.getElementById('uploadFlowchart').addEventListener('click', function() {
+                    uploadBtn.click();
+                });
+            };
+            
+            window.downloadFlowchart = function() {
+                alert("Flowchart download functionality would be implemented with server-side processing.");
+            };
+            
+            // Scroll to top functionality
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Contact form simulation
+            document.querySelector('.cta-button[href^="mailto"]')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = 'hiep@example.com';
+                const subject = 'Interest in HubSpot Strategy Dashboard';
+                const body = 'Hello Hiep,\n\nI saw your HubSpot Strategy Dashboard and would like to discuss...';
+                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            });
+            
+            // Smooth scroll for anchor links in header
+            document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Responsive adjustments
+            function adjustLayout() {
+                const sessionGrid = document.querySelector('.sessions-grid');
+                if (window.innerWidth < 768) {
+                    sessionGrid.style.gridTemplateColumns = '1fr';
+                } else {
+                    sessionGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                }
+            }
+            
+            window.addEventListener('resize', adjustLayout);
+            adjustLayout();
+        });
+    </script>
+</body>
+</html>
