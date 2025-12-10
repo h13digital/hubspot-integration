@@ -34,7 +34,7 @@
             line-height: 1.6;
         }
         
-        /* ====== NEW HEADER DESIGN ====== */
+        /* ====== UPDATED HEADER DESIGN ====== */
         .dashboard-header {
             background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
             color: white;
@@ -49,9 +49,8 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             flex-wrap: wrap;
-            gap: 20px;
         }
         
         .header-left {
@@ -61,9 +60,9 @@
         
         .header-right {
             display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 5px;
         }
         
         .logo-section {
@@ -93,10 +92,10 @@
             font-weight: 700;
             font-size: 16px;
             display: inline-block;
-            margin-top: 10px;
             box-shadow: 0 4px 12px rgba(255, 122, 89, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.3);
             max-width: 600px;
+            vertical-align: middle;
         }
         
         .target-audience-box i {
@@ -109,11 +108,41 @@
             margin-bottom: 5px;
         }
         
+        /* NEW: Container for target-audience-box and hubspot-badge */
+        .header-highlight-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        /* HubSpot badge - updated to align with target-audience-box */
+        .hubspot-badge {
+            background-color: #ff7a59;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            vertical-align: middle;
+            box-shadow: 0 4px 12px rgba(255, 122, 89, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .hubspot-badge i {
+            color: white;
+        }
+        
+        /* Navigation container */
         .header-nav {
             display: flex;
             align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
         
         .nav-link {
@@ -125,6 +154,7 @@
             transition: var(--transition);
             font-size: 0.9rem;
             text-transform: lowercase;
+            white-space: nowrap;
         }
         
         .nav-link:hover {
@@ -185,37 +215,33 @@
             color: #cbd5e0;
         }
         
-        .hubspot-badge {
-            background-color: #ff7a59;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-        
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .header-container {
                 flex-direction: column;
-                align-items: stretch;
-                gap: 15px;
-            }
-            
-            .header-left, .header-right {
-                width: 100%;
+                gap: 20px;
             }
             
             .header-right {
+                width: 100%;
                 justify-content: space-between;
-                flex-wrap: wrap;
+                margin-top: 15px;
             }
             
-            .target-audience-box {
+            .target-audience-box, .hubspot-badge {
                 max-width: 100%;
+            }
+            
+            .header-highlight-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .header-nav {
+                width: 100%;
+                justify-content: space-between;
             }
         }
         
@@ -229,6 +255,7 @@
             }
             
             .header-nav {
+                flex-wrap: wrap;
                 gap: 10px;
             }
             
@@ -241,7 +268,7 @@
                 display: none;
             }
             
-            .target-audience-box {
+            .target-audience-box, .hubspot-badge {
                 font-size: 14px;
                 padding: 12px 20px;
             }
@@ -252,22 +279,14 @@
         }
         
         @media (max-width: 480px) {
-            .header-right {
-                flex-direction: column;
-                gap: 15px;
+            .header-title h1 {
+                font-size: 20px;
             }
             
             .header-nav {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .hubspot-badge {
-                align-self: center;
-            }
-            
-            .header-title h1 {
-                font-size: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
         
@@ -998,11 +1017,17 @@
                         <h1>Digital Marketing, Customer Service and Sales Strategy</h1>
                     </div>
                 </div>
-                <!-- COMBINED BOX FOR TARGET AUDIENCE -->
-                <div class="target-audience-box">
-                    <i class="fas fa-bullseye"></i>
-                    <strong>For Non-Experience Crypto Traders</strong>
-                    SPECIALLY DESIGNED FOR BEGINNER CRYPTO TRADERS
+                <!-- NEW: Container for target-audience-box and hubspot-badge -->
+                <div class="header-highlight-container">
+                    <div class="target-audience-box">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>For Non-Experience Crypto Traders</strong>
+                        SPECIALLY DESIGNED FOR BEGINNER CRYPTO TRADERS
+                    </div>
+                    <div class="hubspot-badge">
+                        <i class="fas fa-cube"></i>
+                        Designed & Integrated via HubSpot
+                    </div>
                 </div>
             </div>
             
@@ -1019,10 +1044,6 @@
                             <span class="user-role">Marketing Architect</span>
                         </div>
                     </a>
-                </div>
-                <div class="hubspot-badge">
-                    <i class="fas fa-cube"></i>
-                    Designed & Integrated via HubSpot
                 </div>
             </div>
         </div>
@@ -1788,7 +1809,7 @@
         </div>
     </section>
     
-    <!-- ====== IMPORTED FOOTER FROM INDEX.HTML ====== -->
+    <!-- ====== UPDATED FOOTER WITH CORRECTED QUICK LINKS ====== -->
     <div class="footer-secondary">
         <div class="footer-secondary-content">
             <div>
@@ -1808,8 +1829,8 @@
                 <ul class="footer-secondary-links">
                     <li><a href="#about" class="footer-secondary-link">About</a></li>
                     <li><a href="#contact" class="footer-secondary-link">Contact</a></li>
-                    <li><a href="crypto-gotomarketplan.html" class="footer-secondary-link">GTM Plan</a></li>
                     <li><a href="hubspot.html" class="footer-secondary-link">HubSpot Strategy</a></li>
+                    <!-- GTM Plan link removed as requested -->
                     <li><a href="https://h13digital.github.io/#portfolio" class="footer-secondary-link">Portfolio</a></li>
                 </ul>
             </div>
