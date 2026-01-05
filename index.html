@@ -1313,9 +1313,10 @@
                         <i class="fas fa-sitemap"></i>
                         <h3>Complete Marketing Funnel Flow</h3>
                         <p>Visual representation of the complete customer journey</p>
-                        <button class="expand-btn" style="background-color: #ff7a59; color: white; margin: 20px auto;" id="uploadFlowchart">
-                            <i class="fas fa-upload"></i> Book Me for Consulting
-                        </button>
+                        <!-- THAY ĐỔI CHÍNH: Nút upload đã được thay bằng liên kết email -->
+                        <a href="mailto:hiep@x5digital.io?subject=Consulting%20Request%20-%20HubSpot%20Strategy%20Dashboard&body=Hello%20Hiep,%0A%0AI%20saw%20your%20HubSpot%20Strategy%20Dashboard%20and%20would%20like%20to%20discuss%20consulting%20services." class="expand-btn" style="background-color: #ff7a59; color: white; margin: 20px auto; text-decoration: none; display: inline-block;">
+                            <i class="fas fa-envelope"></i> Book Me for Consulting
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1885,44 +1886,6 @@
                 window.print();
             });
             
-            // Upload flowchart button
-            const uploadBtn = document.getElementById('uploadFlowchart');
-            if (uploadBtn) {
-                uploadBtn.addEventListener('click', function() {
-                    const fileInput = document.createElement('input');
-                    fileInput.type = 'file';
-                    fileInput.accept = 'image/*';
-                    fileInput.style.display = 'none';
-                    
-                    fileInput.addEventListener('change', function(e) {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                const flowchartContainer = document.querySelector('.flowchart-container');
-                                flowchartContainer.innerHTML = `
-                                    <div style="text-align: center; width: 100%;">
-                                        <img src="${e.target.result}" alt="Uploaded Flowchart" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                                        <div style="margin-top: 15px;">
-                                            <button class="expand-btn" onclick="resetFlowchart()" style="margin-right: 10px;">
-                                                <i class="fas fa-redo"></i> Reset
-                                            </button>
-                                            <button class="expand-btn" style="background-color: #ff7a59; color: white;" onclick="downloadFlowchart()">
-                                                <i class="fas fa-download"></i> Download
-                                            </button>
-                                        </div>
-                                    </div>
-                                `;
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                    
-                    document.body.appendChild(fileInput);
-                    fileInput.click();
-                });
-            }
-            
             // Session card interactions
             const sessionCards = document.querySelectorAll('.session-card');
             sessionCards.forEach(card => {
@@ -1981,30 +1944,6 @@
                 card.style.opacity = '0';
                 card.style.transition = 'transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease';
             });
-            
-            // Global functions for flowchart
-            window.resetFlowchart = function() {
-                const flowchartContainer = document.querySelector('.flowchart-container');
-                flowchartContainer.innerHTML = `
-                    <div class="flowchart-placeholder">
-                        <i class="fas fa-sitemap"></i>
-                        <h3>Complete Marketing Funnel Flow</h3>
-                        <p>Visual representation of the complete customer journey</p>
-                        <button class="expand-btn" style="background-color: #ff7a59; color: white; margin: 20px auto;" id="uploadFlowchart">
-                            <i class="fas fa-upload"></i> Book Me for Consulting
-                        </button>
-                    </div>
-                `;
-                
-                // Reattach event listener
-                document.getElementById('uploadFlowchart').addEventListener('click', function() {
-                    uploadBtn.click();
-                });
-            };
-            
-            window.downloadFlowchart = function() {
-                alert("Flowchart download functionality would be implemented with server-side processing.");
-            };
             
             // Scroll to top functionality
             const scrollTopBtn = document.getElementById('scrollTop');
